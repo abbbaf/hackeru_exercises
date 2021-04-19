@@ -17,12 +17,20 @@
     //Must not be changed.
     const main_email = "hackerutestmail@gmail.com";
 
+    const MIN_NAME_LENGTH = 5;
+
     $ = document.querySelector.bind(document);
     async function sendEmail(e) {
+      const $name = $('#name');
+      const name = $name.value;
+      if (name.length < MIN_NAME_LENGTH) 
+        return $name.setCustomValidity(`Full name must be at least ${MIN_NAME_LENGTH} characters long`);
+      if (!name.match(/^[a-zA-Z]+\s[a-zA-Z]+$/))  
+        return $name.setCustomValidity(`Full name must consist of a valid first name and last name`);
+      $name.setCustomValidity("");
+      const email = $('#email').value;
       const $form = $('#form');
       if (!$form.checkValidity()) return $form.reportValidity();
-      const name = $('#name').value;
-      const email = $('#email').value;
       try {
         await Email.send({
         SecureToken: "CFDFC10F-7ACA-4E1B-9E3D-CEB356B8B1E9",
