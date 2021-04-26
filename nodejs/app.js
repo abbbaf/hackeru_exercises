@@ -9,7 +9,7 @@ const host = process.env.HOST || 'localhost'
 const port = process.env.PORT || 3900;
 const url = `http://${host}:${port}/flights`
 
-mongoose.connect(`mongodb://${host}/flights`, {
+mongoose.connect(`mongodb://localhost/flights`, {
   useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true,
